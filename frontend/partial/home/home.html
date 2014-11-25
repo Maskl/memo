@@ -9,7 +9,7 @@
 	<div class="result">
 
 		<ul ng-repeat="word in result">
-			<li>{{ word }} <a ng-click="addToWithoutArray()">&cross;</a></li>
+			<li>{{ word | uppercaseSpecial }} ({{ word | toNumberCode }}) <a ng-click="addToWithoutArray()">&cross;</a></li>
 		</ul>
 
 		<a ng-hide="errorMessage" ng-click="addToWithoutArray()">Find other...</a>
