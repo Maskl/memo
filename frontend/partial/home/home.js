@@ -1,49 +1,34 @@
-angular.module('memo').factory('Num', function($resource) {
+angular.module('memo').controller('HomeCtrl', function($scope, $resource, num){
 
-	return $resource('http://localhost:3000/num/:id/:without', 
-		{ id: '@id' }, { 
-			get: { 
-				method: 'GET', 
-				params: { bookId: '@id', without: '@without' }, 
-				isArray: true 
-			} 
-		} );
-
-});
-
-
-
-
-angular.module('memo').controller('HomeCtrl', function($scope, $resource, Num){
-
+	var without = [];
 	$scope.result = [];
-	$scope.without = [];
-
-	$scope.addToWithoutArray = function(a, b, c) {
-		if (typeof this.word !== 'undefined') {
-			$scope.without.push(this.word);
-		} else {
-			$scope.without.push($scope.result.join('@'));
-		}
-
-		fetchNewWords();
-	}
-
 
 	$scope.$watch("num", function(newValue, oldValue) {
 		
-		if (typeof newValue == 'undefined' || ("" + newValue).length <= 0) {
+		if (typeof newValue === 'undefined' || !/^[0-9]+$/.test("" + newValue)) {
+			$scope.errorMessage = 'Invalid number!';
+			$scope.result = [];
 			return;
 		}
 
-		$scope.without = [];
-
+		$scope.errorMessage = null;
+		without = [];
 		fetchNewWords();
 	});
 
+	
+	$scope.addToWithoutArray = function(a, b, c) {
+		if (typeof this.word !== 'undefined') {
+			without.push(this.word);
+		} else {
+			without.push($scope.result.join('@'));
+		}
+
+		fetchNewWords();
+	};
+
 	function fetchNewWords() {
-		Num.get({id: $scope.num, without: $scope.without}, function(data) {
-			console.log(data);
+		num.get({id: $scope.num, without: without}, function(data) {
 			$scope.result = data;
 		});
 	}
