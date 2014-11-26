@@ -1,3 +1,10 @@
 <li>
 	{{ word | uppercaseSpecial }} ({{ word | toNumberCode }}) <a ng-click="addToWithoutArray()">&cross;</a>
+	<div ng-if="isImageLoaded(word)">
+		<img src="{{images[word].tbUrl}}" title="contentNoFormatting" /><a href="{{images[word].originalContextUrl}}" title="Source page">{{images[word].visibleUrl}}</a>
+	</div>
+
+	<div ng-if="!isImageLoaded(word)">
+		Loading...
+	</div>
 </li>

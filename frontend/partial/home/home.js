@@ -1,9 +1,10 @@
-angular.module('memo').controller('HomeCtrl', function($scope, $resource, num){
+angular.module('memo').controller('HomeCtrl', function($scope, $resource, num, thumbnail, _){
 
 	var without = [];
 	$scope.result = [];
 	$scope.quality = 0;
 	$scope.num = '';
+	$scope.images = {};
 
 	$scope.$watch("num", function(newValue, oldValue) {
 		
@@ -29,7 +30,7 @@ angular.module('memo').controller('HomeCtrl', function($scope, $resource, num){
 	});
 
 	
-	$scope.addToWithoutArray = function(a, b, c) {
+	$scope.addToWithoutArray = function() {
 		if (typeof this.word !== 'undefined') {
 			without.push(this.word);
 		} else {
@@ -37,6 +38,10 @@ angular.module('memo').controller('HomeCtrl', function($scope, $resource, num){
 		}
 
 		fetchNewWords();
+	};
+
+	$scope.isImageLoaded = function(word) {
+		return word in $scope.images;
 	};
 
 	function fetchNewWords() {
@@ -47,7 +52,33 @@ angular.module('memo').controller('HomeCtrl', function($scope, $resource, num){
 
 		num.get({id: $scope.num, quality: $scope.quality, without: without}, function(data) {
 			$scope.result = data;
+			fetchImages(data);
 		});
+	}
+
+	function fetchImages(data) {
+
+		_.each(data, function (word) {
+			if ($scope.images[word]) {
+				return;
+			}
+
+			thumbnail.get({word: word}, function(data, a, b, c) {
+				if (typeof data === 'undefined' || typeof data.responseData === 'undefined' || typeof data.responseData.cursor === 'undefined' || typeof data.responseData.cursor.moreResultsUrl !== 'string' || typeof data.responseData.results === 'undefined' || typeof data.responseData.results.length <= 0)  {
+					return;
+				}
+
+				var whatIndex = data.responseData.cursor.moreResultsUrl.indexOf('&q=');
+				if (whatIndex <= 0) {
+					return;
+				}
+				
+				var what = data.responseData.cursor.moreResultsUrl.substr(whatIndex + 3);
+				$scope.images[word] = data.responseData.results[0];
+				console.log(what, data, a, b, c, word);
+			});		
+		});
+		
 	}
 });
 
