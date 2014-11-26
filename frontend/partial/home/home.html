@@ -1,18 +1,33 @@
-<div>
-
-	<input type="text" ng-model="num"></div>
-	<input type="text" ng-model="quality"></div>
-
-	<div class="error">
-		{{errorMessage}}
-	</div>
-
-	<div class="result">
-
-		<ul ng-repeat="word in result">
-			<word></word>
-		</ul>
-
-	</div>
-
+<div class="logo">
+	MEMO
 </div>
+
+<input type="text" ng-model="num" class="form-control input-lg" />
+
+<div class="quality-options">
+	<label class="radio-inline">
+		<input type="radio" ng-model="quality" id="quality1" name="quality" value="0" />Wszystkie
+	</label>
+	<label class="radio-inline">
+		<input type="radio" ng-model="quality" id="quality2" name="quality" value="120" />Domyślnie
+	</label>
+	<label  class="radio-inline">
+		<input type="radio" ng-model="quality" id="quality3" name="quality" value="200" />Proste
+	</label>
+</div>
+
+<div ng-if="invalidNumber" class="error">
+	Niepoprawny numer
+</div>
+
+<div ng-if="emptyNumber" class="help">
+	Lorem ipsum dolor.
+</div>	
+
+<div ng-if="!invalidNumber && !emptyNumber && result.length > 0" class="result">
+
+	<ul ng-repeat="word in result">
+		<word></word>
+	</ul>
+</div>
+

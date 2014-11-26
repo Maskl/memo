@@ -8,13 +8,18 @@ angular.module('memo').controller('HomeCtrl', function($scope, $resource, num, t
 
 	$scope.$watch("num", function(newValue, oldValue) {
 		
-		if (typeof newValue === 'undefined' || !/^[0-9]+$/.test("" + newValue)) {
-			$scope.errorMessage = 'Invalid number!';
+		if (typeof newValue === 'undefined' || newValue.length <= 0) {
+			$scope.emptyNumber = true;
+			$scope.result = [];
+			return;			
+		} else if (!/^[0-9]+$/.test("" + newValue)) {
+			$scope.invalidNumber = true;
 			$scope.result = [];
 			return;
 		}
 
-		$scope.errorMessage = null;
+		$scope.emptyNumber = false;
+		$scope.invalidNumber = false;
 		without = [];
 		fetchNewWords();
 	});
