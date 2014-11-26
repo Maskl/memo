@@ -19,10 +19,16 @@ sqlConnection.connect(function(err) {
     console.log('connected as id ' + sqlConnection.threadId);
 });
 
-router.get('/:num/:without?', function(req, res) {
+router.get('/:num/:quality?/:without?', function(req, res) {
 
 	if (typeof req.params.num === 'undefined' || !/^[0-9]+$/.test("" + req.params.num)) {
 		throw 'invalid number';
+	}
+
+	if (typeof req.params.num === 'undefined' || !/^[1-9][0-9]*$/.test("" + req.params.quality)) {
+		quality = 0;
+	} else {
+		quality = +req.params.quality;
 	}
 
 	var without = null;
@@ -30,14 +36,21 @@ router.get('/:num/:without?', function(req, res) {
 		without = req.params.without.split(',');
 	}
 
-	findTranslation(req.params.num, without, getWordFromDB, function(out) {
+	findTranslation(req.params.num, without, getWordFromDB, quality, function(out) {
 		res.send(out);
 	});
 
 });
 
-function getWordFromDB(code, without, successCallback, failCallback) {
-	sqlConnection.query('SELECT `word` FROM `words` WHERE `code` = ?', code, function (err, rows, fields) {
+function getWordFromDB(code, without, quality, successCallback, failCallback) {
+	var str = 'SELECT `word` FROM `words` WHERE `code` = ?';
+	var params = code;
+	if (quality > 0) {
+		str = 'SELECT `word` FROM `words` WHERE `code` = ? AND `value` > ?';
+		params = [code, quality];
+	}
+	
+	sqlConnection.query(str, params, function (err, rows, fields) {
 		
 		if (err) {
 			throw err;

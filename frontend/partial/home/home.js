@@ -2,6 +2,8 @@ angular.module('memo').controller('HomeCtrl', function($scope, $resource, num){
 
 	var without = [];
 	$scope.result = [];
+	$scope.quality = 0;
+	$scope.num = '';
 
 	$scope.$watch("num", function(newValue, oldValue) {
 		
@@ -13,6 +15,16 @@ angular.module('memo').controller('HomeCtrl', function($scope, $resource, num){
 
 		$scope.errorMessage = null;
 		without = [];
+		fetchNewWords();
+	});
+
+	$scope.$watch("quality", function(newValue, oldValue) {
+		
+		if (typeof newValue === 'undefined' || !/^[0-9]+$/.test("" + newValue)) {
+			$scope.quality = oldValue;
+			return;
+		}
+
 		fetchNewWords();
 	});
 
@@ -28,7 +40,12 @@ angular.module('memo').controller('HomeCtrl', function($scope, $resource, num){
 	};
 
 	function fetchNewWords() {
-		num.get({id: $scope.num, without: without}, function(data) {
+		if ($scope.num.length === 0) {
+			$scope.result = [];
+			return;
+		}
+
+		num.get({id: $scope.num, quality: $scope.quality, without: without}, function(data) {
 			$scope.result = data;
 		});
 	}

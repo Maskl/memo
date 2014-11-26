@@ -1,6 +1,7 @@
 <div>
 
 	<input type="text" ng-model="num"></div>
+	<input type="text" ng-model="quality"></div>
 
 	<div class="error">
 		{{errorMessage}}
@@ -9,7 +10,7 @@
 	<div class="result">
 
 		<ul ng-repeat="word in result">
-			<li>{{ word | uppercaseSpecial }} ({{ word | toNumberCode }}) <a ng-click="addToWithoutArray()">&cross;</a></li>
+			<word></word>
 		</ul>
 
 		<a ng-hide="errorMessage" ng-click="addToWithoutArray()">Find other...</a>
