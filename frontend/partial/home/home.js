@@ -56,11 +56,9 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 	});
 
 	$scope.switchLanguage = function() {
-		$scope.lang = ($scope.lang == 'pl') ? 'en' : 'pl';
-		var urlLang = $scope.lang == 'pl' ? '/pl' : '/';
+		$scope.lang = ($scope.lang === 'pl') ? 'en' : 'pl';
+		var urlLang = $scope.lang === 'pl' ? '/pl' : '/';
 		$location.url(urlLang + '?' + $scope.num);
-		// $translate.use($scope.lang);
-		// fetchNewWords();
 	};
 
 	
@@ -90,7 +88,7 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 
 	function fetchNewWordsWithoutValidation() {
 		$scope.generatingWords = true;
-		num.get({id: $scope.num, quality: $scope.quality, without: without}, function(data) {
+		num.get({id: $scope.num, quality: $scope.quality, without: without, lang: $scope.lang}, function(data) {
 			$scope.result = data;
 			$scope.inTyping = false;
 			$scope.generatingWords = false;
@@ -107,7 +105,7 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 
 			var searchWord = word.toLowerCase();
 			if (searchWord in thumbnailWordReplacement) {
-				searchWord = thumbnailWordReplacement[searchWord];
+				searchWord = thumbnailWordReplacement[$scope.lang][searchWord];
 			}			
 
 			thumbnail.get({word: searchWord}, function(data) {

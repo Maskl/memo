@@ -1,22 +1,24 @@
-angular.module('memo').filter('uppercaseSpecial', function(_, majorSystemDict, digraphsDict) {
+angular.module('memo').filter('uppercaseSpecial', function($translate, _, majorSystemDict, digraphsDict) {
 	return function(input, arg) {
 
 		if (typeof input !== 'string') {
 			return input;
 		}
 
+		var lang = $translate.use();
+
 		input = input.toLowerCase();
 
 		var out = '';
 		_.each(input, function(character) {
-			if (character in majorSystemDict) {
+			if (character in majorSystemDict[lang]) {
 				out += character.toUpperCase();
 			} else {
 				out += character.toLowerCase();
 			}
 		});
 
-		_.each(digraphsDict, function(val, key) {
+		_.each(digraphsDict[lang], function(val, key) {
 			out = out.replace(new RegExp(key.toUpperCase(), 'gi'), key.toLowerCase());
 		});
 

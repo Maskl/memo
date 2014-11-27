@@ -1,13 +1,18 @@
 angular.module('memo').factory('digraphsDict',function() {
 
 	var digraphsDict = {
-		'rz': true,
-		'sz': true,
-		'cz': true,
-		'ch': true,
-		'dz': true,
-		'dż': true,
-		'dź': true
+		'pl': {
+			'rz': true,
+			'sz': true,
+			'cz': true,
+			'ch': true,
+			'dz': true,
+			'dż': true,
+			'dź': true
+		},
+		'en': {
+
+		}
 	};
 
 	return digraphsDict;
