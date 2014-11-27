@@ -8,13 +8,13 @@
 
 <div class="quality-options">
 	<label class="radio-inline">
-		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality1" name="quality" value="0" />{{ 'ALL_WORDS' | translate }}
+		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality1" name="quality" value="{{ 'QUALITY_1' | translate }}" />{{ 'ALL_WORDS' | translate }}
 	</label>
 	<label class="radio-inline">
-		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality2" name="quality" value="120" />{{ 'DEFAULT_WORDS' | translate }}
+		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality2" name="quality" value="{{ 'QUALITY_2' | translate }}" />{{ 'DEFAULT_WORDS' | translate }}
 	</label>
 	<label  class="radio-inline">
-		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality3" name="quality" value="200" />{{ 'BEST_WORDS' | translate }}
+		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality3" name="quality" value="{{ 'QUALITY_3' | translate }}" />{{ 'BEST_WORDS' | translate }}
 	</label>
 </div>
 

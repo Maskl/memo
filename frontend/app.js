@@ -19,6 +19,9 @@ angular.module('memo').config(function($stateProvider, $urlRouterProvider, $tran
     $urlRouterProvider.otherwise('/');
 
     $translateProvider.translations('en', {
+        'QUALITY_1': '0',
+        'QUALITY_2': '120',
+        'QUALITY_3': '200',
         'HEADER': 'Mnemo',
         'ALL_WORDS': 'All words',
         'DEFAULT_WORDS': 'Default',
@@ -30,6 +33,9 @@ angular.module('memo').config(function($stateProvider, $urlRouterProvider, $tran
     });   
 
     $translateProvider.translations('pl', {
+        'QUALITY_1': '0',
+        'QUALITY_2': '1000',
+        'QUALITY_3': '1100',        
         'HEADER': 'Mnemo',
         'ALL_WORDS': 'Wszystkie słowa',
         'DEFAULT_WORDS': 'Domyślnie',

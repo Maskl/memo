@@ -30,6 +30,7 @@ angular.module('memo').factory('majorSystemDict',function() {
 			'c': '7',
 			'k': '8',
 			'g': '8',
+			'v': '8',
 			'f': '9',
 			'w': '9',
 			'p': '0',

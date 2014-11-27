@@ -2,7 +2,7 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 
 	var without = [];
 	$scope.result = [];
-	$scope.quality = 120;
+	$scope.quality = 0;
 	$scope.num = '';
 	$scope.images = {};
 	$scope.emptyNumber = true;
@@ -58,7 +58,7 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 
 	$scope.showMain = function() {
 		$scope.num = '';
-		$location.search('')
+		$location.search('');
 	};
 
 	$scope.switchLanguage = function() {

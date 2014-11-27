@@ -43,17 +43,14 @@ router.get('/:lang/:num/:quality?/:without?', function(req, res) {
 });
 
 function getWordFromDB(lang, code, without, quality, successCallback, failCallback) {
-	var str = 'SELECT `word` FROM `words` WHERE `code` = ? ORDER BY `value`';
+	if (lang.length != 2) {
+		return;
+	}
+	var str = 'SELECT `word` FROM `words_' + lang + '` WHERE `code` = ?';
 	var params = code;
 	if (quality > 0) {
-		str = 'SELECT `word` FROM `words` WHERE `code` = ? AND `value` > ? ORDER BY `value`';
+		str = 'SELECT `word` FROM `words_' + lang + '` WHERE `code` = ? AND `value` > ?';
 		params = [code, quality];
-	}
-	
-	if (lang === 'pl') {
-		str += ' DESC';
-	} else {
-		str += ' ASC';
 	}
 
 	sqlConnection.query(str, params, function (err, rows, fields) {
