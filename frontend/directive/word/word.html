@@ -1,10 +1,11 @@
-<li>
-	{{ word | uppercaseSpecial }} ({{ word | toNumberCode }}) <a ng-click="addToWithoutArray()">&cross;</a>
-	<div ng-if="isImageLoaded(word)">
-		<img src="{{images[word].tbUrl}}" title="contentNoFormatting" /><a href="{{images[word].originalContextUrl}}" title="Source page">{{images[word].visibleUrl}}</a>
+<div class="word">
+	<abbr class="word-title" title="{{ word | toNumberCode }}">{{ word | uppercaseSpecial }}</abbr> <a class="word-remove" ng-click="addToWithoutArray()">&cross;</a>
+	
+	<div class="word-image" ng-if="isImageLoaded(word)">
+		<a target="_blank" href="{{images[word].unescapedUrl}}"><img class="img-thumbnail" src="{{images[word].tbUrl}}" title="{{images[word].contentNoFormatting}}" /></a>
+		<a target="_blank" class="word-source" href="{{images[word].originalContextUrl}}" title="Source page">{{images[word].visibleUrl}}</a>
 	</div>
 
-	<div ng-if="!isImageLoaded(word)">
-		Loading...
+	<div class="word-image-loading" ng-if="!isImageLoaded(word)">
 	</div>
-</li>
+</div>

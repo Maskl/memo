@@ -4,14 +4,15 @@ angular.module('memo').config(function($stateProvider, $urlRouterProvider) {
 
 
     $stateProvider.state('home', {
-        url: '/home',
+        url: '',
         templateUrl: 'partial/home/home.html',
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl',
+        reloadOnSearch: false
     });
 
 
     /* Add New States Above */
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('');
 
 });
 

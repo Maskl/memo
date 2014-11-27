@@ -2,17 +2,17 @@
 	MEMO
 </div>
 
-<input type="text" ng-model="num" class="form-control input-lg" />
+<input ng-disabled="generatingWords" type="text" ng-model="num" class="num-input form-control input-lg" autofocus="autofocus" />
 
 <div class="quality-options">
 	<label class="radio-inline">
-		<input type="radio" ng-model="quality" id="quality1" name="quality" value="0" />Wszystkie
+		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality1" name="quality" value="0" />Wszystkie
 	</label>
 	<label class="radio-inline">
-		<input type="radio" ng-model="quality" id="quality2" name="quality" value="120" />Domyślnie
+		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality2" name="quality" value="120" />Domyślnie
 	</label>
 	<label  class="radio-inline">
-		<input type="radio" ng-model="quality" id="quality3" name="quality" value="200" />Proste
+		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality3" name="quality" value="200" />Proste
 	</label>
 </div>
 
@@ -24,10 +24,18 @@
 	Lorem ipsum dolor.
 </div>	
 
-<div ng-if="!invalidNumber && !emptyNumber && result.length > 0" class="result">
+<div ng-if="inTyping">
+ 	Wyszukiwanie...
+</div>
 
-	<ul ng-repeat="word in result">
-		<word></word>
-	</ul>
+<div ng-if="!invalidNumber && !emptyNumber && !inTyping && result.length == 0">
+ 	Wyszukiwanie numeru trwało zbyt długo...
+</div>
+
+
+<div ng-if="!invalidNumber && !emptyNumber && !inTyping && result.length > 0" class="result">
+ 	<div class="word-group" cl>
+		<word ng-repeat="word in result"></word>
+	</div>
 </div>
 

@@ -43,10 +43,10 @@ router.get('/:num/:quality?/:without?', function(req, res) {
 });
 
 function getWordFromDB(code, without, quality, successCallback, failCallback) {
-	var str = 'SELECT `word` FROM `words` WHERE `code` = ?';
+	var str = 'SELECT `word` FROM `words` WHERE `code` = ? ORDER BY `value` DESC';
 	var params = code;
 	if (quality > 0) {
-		str = 'SELECT `word` FROM `words` WHERE `code` = ? AND `value` > ?';
+		str = 'SELECT `word` FROM `words` WHERE `code` = ? AND `value` > ? ORDER BY `value` DESC';
 		params = [code, quality];
 	}
 	

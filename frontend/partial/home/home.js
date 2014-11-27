@@ -1,10 +1,18 @@
-angular.module('memo').controller('HomeCtrl', function($scope, $resource, num, thumbnail, _){
+angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $location, num, thumbnail, thumbnailWordReplacement){
 
 	var without = [];
 	$scope.result = [];
-	$scope.quality = 0;
+	$scope.quality = 120;
 	$scope.num = '';
 	$scope.images = {};
+	$scope.emptyNumber = true;
+	$scope.invalidNumber = false;
+	$scope.generatingWords = false;
+
+	for (var numStart in $location.search()) {
+		$scope.num = numStart;
+		break;
+	}
 
 	$scope.$watch("num", function(newValue, oldValue) {
 		
@@ -17,6 +25,9 @@ angular.module('memo').controller('HomeCtrl', function($scope, $resource, num, t
 			$scope.result = [];
 			return;
 		}
+
+		
+		$location.search(newValue);
 
 		$scope.emptyNumber = false;
 		$scope.invalidNumber = false;
@@ -55,20 +66,33 @@ angular.module('memo').controller('HomeCtrl', function($scope, $resource, num, t
 			return;
 		}
 
+		$scope.inTyping = true;
+		fetchNewWordsWithoutValidationDebounce();
+	}
+
+	function fetchNewWordsWithoutValidation() {
+		$scope.generatingWords = true;
 		num.get({id: $scope.num, quality: $scope.quality, without: without}, function(data) {
 			$scope.result = data;
-			fetchImages(data);
+			$scope.inTyping = false;
+			$scope.generatingWords = false;
+			fetchImagesDebounce();
 		});
 	}
 
-	function fetchImages(data) {
+	function fetchImages() {
 
-		_.each(data, function (word) {
+		_.each($scope.result, function (word) {
 			if ($scope.images[word]) {
 				return;
 			}
 
-			thumbnail.get({word: word}, function(data, a, b, c) {
+			var searchWord = word.toLowerCase();
+			if (searchWord in thumbnailWordReplacement) {
+				searchWord = thumbnailWordReplacement[searchWord];
+			}			
+
+			thumbnail.get({word: searchWord}, function(data) {
 				if (typeof data === 'undefined' || typeof data.responseData === 'undefined' || typeof data.responseData.cursor === 'undefined' || typeof data.responseData.cursor.moreResultsUrl !== 'string' || typeof data.responseData.results === 'undefined' || typeof data.responseData.results.length <= 0)  {
 					return;
 				}
@@ -80,10 +104,13 @@ angular.module('memo').controller('HomeCtrl', function($scope, $resource, num, t
 				
 				var what = data.responseData.cursor.moreResultsUrl.substr(whatIndex + 3);
 				$scope.images[word] = data.responseData.results[0];
-				console.log(what, data, a, b, c, word);
 			});		
 		});
-		
+	
 	}
+
+
+	var fetchNewWordsWithoutValidationDebounce = _.debounce(fetchNewWordsWithoutValidation, 1000);
+	var fetchImagesDebounce = _.debounce(fetchImages, 100);
 });
 
