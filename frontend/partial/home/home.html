@@ -1,35 +1,37 @@
 <div class="logo">
-	MEMO
+	{{ 'HEADER' | translate }}
 </div>
+
+<div ng-click="switchLanguage()" class="lang lang-from-{{lang}}"></div>
 
 <input ng-disabled="generatingWords" type="text" ng-model="num" class="num-input form-control input-lg" autofocus="autofocus" />
 
 <div class="quality-options">
 	<label class="radio-inline">
-		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality1" name="quality" value="0" />Wszystkie
+		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality1" name="quality" value="0" />{{ 'ALL_WORDS' | translate }}
 	</label>
 	<label class="radio-inline">
-		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality2" name="quality" value="120" />Domyślnie
+		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality2" name="quality" value="120" />{{ 'DEFAULT_WORDS' | translate }}
 	</label>
 	<label  class="radio-inline">
-		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality3" name="quality" value="200" />Proste
+		<input ng-disabled="generatingWords" type="radio" ng-model="quality" id="quality3" name="quality" value="200" />{{ 'BEST_WORDS' | translate }}
 	</label>
 </div>
 
 <div ng-if="invalidNumber" class="error">
-	Niepoprawny numer
+	{{ 'INVALID_NUMBER' | translate }}
 </div>
 
 <div ng-if="emptyNumber" class="help">
-	Lorem ipsum dolor.
+	<p translate="{{ 'HOWTO' }}"></p>
 </div>	
 
 <div ng-if="inTyping">
- 	Wyszukiwanie...
+ 	{{ 'SEARCHING' | translate }}
 </div>
 
 <div ng-if="!invalidNumber && !emptyNumber && !inTyping && result.length == 0">
- 	Wyszukiwanie numeru trwało zbyt długo...
+ 	{{ 'TOO_LONG' | translate }}
 </div>
 
 

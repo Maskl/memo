@@ -1,4 +1,4 @@
-angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $location, num, thumbnail, thumbnailWordReplacement){
+angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $location, $translate, num, thumbnail, thumbnailWordReplacement){
 
 	var without = [];
 	$scope.result = [];
@@ -8,6 +8,16 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 	$scope.emptyNumber = true;
 	$scope.invalidNumber = false;
 	$scope.generatingWords = false;
+
+
+	var url = $location.url();
+	if (url.indexOf('/pl') === 0) {
+		$translate.use('pl');
+	} else {
+		$translate.use('en');
+	}
+
+	$scope.lang = $translate.use();
 
 	for (var numStart in $location.search()) {
 		$scope.num = numStart;
@@ -44,6 +54,14 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 
 		fetchNewWords();
 	});
+
+	$scope.switchLanguage = function() {
+		$scope.lang = ($scope.lang == 'pl') ? 'en' : 'pl';
+		var urlLang = $scope.lang == 'pl' ? '/pl' : '/';
+		$location.url(urlLang + '?' + $scope.num);
+		// $translate.use($scope.lang);
+		// fetchNewWords();
+	};
 
 	
 	$scope.addToWithoutArray = function() {
