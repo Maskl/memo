@@ -12,7 +12,7 @@ findTranslation = function(lang, num, without, getWordFromDB, quality, callback,
 			without = [];
 		}
 		done = 0;
-		tryLen = Math.floor(num.length / 2) + 1;
+		tryLen = Math.min(10, Math.floor(num.length / 2) + 1); // try first half but not more than 10 chars
 		out = [];
 		iterations = 0;
 		croppedNum = num;

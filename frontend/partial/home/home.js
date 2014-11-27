@@ -18,6 +18,7 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 	}
 
 	$scope.lang = $translate.use();
+	$scope.langUrl = ($scope.lang === 'en') ? '' : $scope.lang;
 
 	for (var numStart in $location.search()) {
 		$scope.num = numStart;
@@ -54,6 +55,11 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 
 		fetchNewWords();
 	});
+
+	$scope.showMain = function() {
+		$scope.num = '';
+		$location.search('')
+	};
 
 	$scope.switchLanguage = function() {
 		$scope.lang = ($scope.lang === 'pl') ? 'en' : 'pl';
@@ -104,7 +110,7 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 			}
 
 			var searchWord = word.toLowerCase();
-			if (searchWord in thumbnailWordReplacement) {
+			if (searchWord in thumbnailWordReplacement[$scope.lang]) {
 				searchWord = thumbnailWordReplacement[$scope.lang][searchWord];
 			}			
 

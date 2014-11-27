@@ -6,15 +6,13 @@ angular.module('memo').config(function($stateProvider, $urlRouterProvider, $tran
     $stateProvider.state('home', {
         url: '/',
         templateUrl: 'partial/home/home.html',
-        controller: 'HomeCtrl',
-        reloadOnSearch: false
+        controller: 'HomeCtrl'
     });
 
     $stateProvider.state('homepl', {
         url: '/pl',
         templateUrl: 'partial/home/home.html',
-        controller: 'HomeCtrl',
-        reloadOnSearch: false
+        controller: 'HomeCtrl'
     });    
 
 
