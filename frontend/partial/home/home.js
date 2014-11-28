@@ -99,6 +99,9 @@ angular.module('memo').controller('HomeCtrl', function(_, $scope, $resource, $lo
 			$scope.inTyping = false;
 			$scope.generatingWords = false;
 			fetchImagesDebounce();
+			setTimeout(function() {
+				document.getElementById("num-input").focus();
+			}, 500);
 		});
 	}
 

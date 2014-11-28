@@ -4,7 +4,7 @@
 
 <div ng-click="switchLanguage()" class="lang lang-from-{{lang}}"></div>
 
-<input ng-disabled="generatingWords" type="text" ng-model="num" class="num-input form-control input-lg" autofocus="autofocus" />
+<input maxlength="20" id="num-input" ng-disabled="generatingWords" type="text" ng-model="num" class="num-input form-control input-lg" autofocus="autofocus" />
 
 <div class="quality-options">
 	<label class="radio-inline">
@@ -22,11 +22,11 @@
 	{{ 'INVALID_NUMBER' | translate }}
 </div>
 
-<div ng-if="emptyNumber" class="help">
+<div ng-if="emptyNumber && !invalidNumber" class="help">
 	<p translate="{{ 'HOWTO' }}"></p>
 </div>	
 
-<div ng-if="inTyping">
+<div ng-if="inTyping && !invalidNumber">
  	{{ 'SEARCHING' | translate }}
 </div>
 

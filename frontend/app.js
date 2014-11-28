@@ -29,7 +29,7 @@ angular.module('memo').config(function($stateProvider, $urlRouterProvider, $tran
         'INVALID_NUMBER': 'Invalid number',
         'SEARCHING': 'Searching...',
         'TOO_LONG': 'Search takes too long!',
-        'HOWTO': 'This page helps with finding representation of number in simplified <a target="_blank" href="http://en.wikipedia.org/wiki/Mnemonic_major_system">mnemonic major system</a>.<br><br>If you want to rememeber any number, type them in field above and remember shown words.<br>To recall number just replace consonants:<small><br>T, D → 1<br>N → 2<br>M → 3<br>R → 4<br>L → 5<br>J, C → 6<br>K, G → 7<br>F, W, V → 8<br>P, B → 9<br>Z, S → 0</small><br>Omit vowels and other consonants.'
+        'HOWTO': 'This page helps with finding representation of number in simplified <a target="_blank" href="http://en.wikipedia.org/wiki/Mnemonic_major_system">mnemonic major system</a>.<br><br>If you want to rememeber any number, type them in the field above and remember shown words.<br>To recall number just replace consonants:<small><br>T, D → 1<br>N → 2<br>M → 3<br>R → 4<br>L → 5<br>J, C → 6<br>K, G → 7<br>F, W, V → 8<br>P, B → 9<br>Z, S → 0</small><br>Omit vowels and other consonants.'
     });   
 
     $translateProvider.translations('pl', {

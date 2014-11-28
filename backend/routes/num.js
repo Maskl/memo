@@ -21,8 +21,9 @@ sqlConnection.connect(function(err) {
 
 router.get('/:lang/:num/:quality?/:without?', function(req, res) {
 
-	if (typeof req.params.num === 'undefined' || !/^[0-9]+$/.test("" + req.params.num)) {
-		throw 'invalid number';
+	if (typeof req.params.num === 'undefined' || !/^[0-9]+$/.test("" + req.params.num) || req.params.num.length > 20) {
+		res.send([]);
+		return;
 	}
 
 	if (typeof req.params.num === 'undefined' || !/^[1-9][0-9]*$/.test("" + req.params.quality)) {
