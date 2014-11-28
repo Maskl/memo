@@ -20,11 +20,11 @@ angular.module('memo').config(function($stateProvider, $urlRouterProvider, $tran
 
     $translateProvider.translations('en', {
         'QUALITY_1': '0',
-        'QUALITY_2': '120',
-        'QUALITY_3': '200',
+        'QUALITY_2': '1000',
+        'QUALITY_3': '1100',
         'HEADER': 'Mnemo',
         'ALL_WORDS': 'All words',
-        'DEFAULT_WORDS': 'Default',
+        'DEFAULT_WORDS': 'Smart',
         'BEST_WORDS': 'Simple words',
         'INVALID_NUMBER': 'Invalid number',
         'SEARCHING': 'Searching...',
@@ -32,13 +32,13 @@ angular.module('memo').config(function($stateProvider, $urlRouterProvider, $tran
         'HOWTO': 'This page helps with finding representation of number in simplified <a target="_blank" href="http://en.wikipedia.org/wiki/Mnemonic_major_system">mnemonic major system</a>.<br><br>If you want to rememeber any number, type them in the field above and remember shown words.<br>To recall number just replace consonants:<small><br>T, D → 1<br>N → 2<br>M → 3<br>R → 4<br>L → 5<br>J, C → 6<br>K, G → 7<br>F, W, V → 8<br>P, B → 9<br>Z, S → 0</small><br>Omit vowels and other consonants.'
     });   
 
-    $translateProvider.translations('pl', {
+    $translateProvider.translations('pl', {          
         'QUALITY_1': '0',
-        'QUALITY_2': '1000',
-        'QUALITY_3': '1100',        
+        'QUALITY_2': '120',
+        'QUALITY_3': '200',
         'HEADER': 'Mnemo',
         'ALL_WORDS': 'Wszystkie słowa',
-        'DEFAULT_WORDS': 'Domyślnie',
+        'DEFAULT_WORDS': 'Inteligentnie',
         'BEST_WORDS': 'Proste słowa',
         'INVALID_NUMBER': 'Błędny numer',
         'SEARCHING': 'Wyszukiwanie...',

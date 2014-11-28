@@ -1,12 +1,10 @@
 findTranslation = function(lang, num, without, getWordFromDB, quality, callback, done, tryLen, out, iterations) {
-
 	if (iterations > 100) {
 		callback([]);
 		return;
 	}
 
 	var croppedNum;
-
 	if (typeof done === 'undefined') {
 		if (!without) {
 			without = [];
@@ -21,9 +19,10 @@ findTranslation = function(lang, num, without, getWordFromDB, quality, callback,
 	}
 
 	getWordFromDB(lang, croppedNum, without, quality, function (word) {
+		// Found!
+
 		out.push(word);
 		done += croppedNum.length;
-		console.log(word + ' / ' + croppedNum + ' / ' + done + ' / ' + num);
 		if (done === num.length) {
 			callback(out);
 			return;
@@ -35,10 +34,11 @@ findTranslation = function(lang, num, without, getWordFromDB, quality, callback,
 		findTranslation(lang, num, without, getWordFromDB, quality, callback, done, num.length - done, out, iterations + 1);
 
 	}, function() {
+		// Not found!
 		
 		tryLen = tryLen - 1;
 		if (done + tryLen == num.length - 1) {
-			// do not want one letter word at the end
+			// do not want one letter word at the end (we know there are 2 chars results)
 			tryLen -= 1;
 		}
 		findTranslation(lang, num, without, getWordFromDB, quality, callback, done, tryLen, out, iterations + 1);

@@ -34,10 +34,12 @@
  	{{ 'TOO_LONG' | translate }}
 </div>
 
-
 <div ng-if="!invalidNumber && !emptyNumber && !inTyping && result.length > 0" class="result">
  	<div class="word-group" cl>
 		<word ng-repeat="word in result"></word>
 	</div>
 </div>
 
+<div class="footer">
+	<a href="mailto:masklod@gmail.com">Marek Skłodowski</a>, 2014
+</div>

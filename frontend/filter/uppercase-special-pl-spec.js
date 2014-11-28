@@ -36,7 +36,7 @@ describe('uppercaseSpecialPl', function() {
 	}));
 
 
-	it('should lowercase polish digraph', inject(function($filter) {
+	it('should lowercase polish digraphs', inject(function($filter) {
 
 		var filter = $filter('uppercaseSpecial');
 
