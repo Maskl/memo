@@ -1,6 +1,10 @@
-describe('toNumberCode', function() {
+describe('toNumberCodePl', function() {
 
-	beforeEach(module('memo'));
+	beforeEach(function() {
+		module('memo', function config($translateProvider) {
+			$translateProvider.preferredLanguage('pl');
+		});
+	});
 
 	it('should properly translate special consonants', inject(function($filter) {
 
@@ -32,7 +36,7 @@ describe('toNumberCode', function() {
 	}));
 
 
-	it('should return empty string for polish digraph', inject(function($filter) {
+	it('should return empty string for polish digraphs', inject(function($filter) {
 
 		var filter = $filter('toNumberCode');
 

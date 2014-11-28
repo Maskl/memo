@@ -1,5 +1,7 @@
 angular.module('memo').factory('thumbnailWordReplacement',function() {
 
+	// Images are fetching from english version of Google Images, so sometimes we get images of english words... (for example sum sing for polish word sum [kind of fish])
+	// Below there are replacement for common words (for 1 and 2 digits codes).
 	var thumbnailWordReplacement = {
 		'pl': {
 			'sum': 'sum ryba',

@@ -1,3 +1,4 @@
+// Convert word to number code, for example: computer -> 63914
 angular.module('memo').filter('toNumberCode', function($translate, majorSystemDict, digraphsDict, _) {
 	return function(input,arg) {
 

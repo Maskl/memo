@@ -1,6 +1,10 @@
-describe('uppercaseSpecial', function() {
+describe('uppercaseSpecialPl', function() {
 
-	beforeEach(module('memo'));
+	beforeEach(function() {
+		module('memo', function config($translateProvider) {
+			$translateProvider.preferredLanguage('pl');
+		});
+	});
 
 	it('should uppercase special consonants', inject(function($filter) {
 

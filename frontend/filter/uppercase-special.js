@@ -1,3 +1,4 @@
+// Convert important consonants, for example: computer -> CoMPuTeR
 angular.module('memo').filter('uppercaseSpecial', function($translate, _, majorSystemDict, digraphsDict) {
 	return function(input, arg) {
 
