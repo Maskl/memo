@@ -3,6 +3,9 @@ Mnemo
 
 This app help you find representation of number in simplified [mnemonic major system](http://en.wikipedia.org/wiki/Mnemonic_major_system "mnemonic major system") in English and Polish languages.
 
+Check it at:
+[mnemo.herokuapp.com](http://mnemo.herokuapp.com/)
+
 ![Screen](https://dl.dropboxusercontent.com/u/219546/pub/projects/memo/screen.png)
 
 Example
@@ -31,4 +34,4 @@ For example in word **telephone**  we have letters T, L, P and N which gives us 
 
 Tech
 -------------
-JS, Sass, Angular, Node.js, ExpressJS, MySQL, Jasmine, Yo, Grunt,  Bower
+JS, Sass, Angular, Node.js, ExpressJS, MySQL, Jasmine, Heroku, Yo, Grunt,  Bower
